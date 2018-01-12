@@ -1,0 +1,75 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations{
+    provided
+}
+
+dependencies {
+
+    
+    compile 'org.mybatis:mybatis:3.2.8'
+    compile 'org.mybatis:mybatis-spring:1.2.2'
+    compile 'mysql:mysql-connector-java:5.1.35'
+    compile('redis.clients:jedis')
+   
+    compile 'org.springframework.boot:spring-boot-starter-jdbc:1.2.4.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.4.RELEASE'
+    //compile 'org.springframework.security:spring-security-config:3.2.7.RELEASE'
+    compile('org.springframework.boot:spring-boot-starter-mail')
+        compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('org.springframework:spring-context-support')
+    compile('org.springframework.session:spring-session')
+    
+    compile "jstl:jstl:1.2"
+    
+    //compile 'com.alibaba:druid:1.0.14'
+    compile group: 'com.alibaba', name: 'druid', version: '1.0.17'
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
+    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.8.3'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.9'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.20'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.2.1'
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.10.1'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.10.1'
+
+    compile ('org.springframework.boot:spring-boot-starter-web:1.2.4.RELEASE') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+
+    compile ('org.springframework.boot:spring-boot-starter-jetty:1.2.4.RELEASE') {
+        exclude group: 'org.eclipse.jetty.websocket'
+    }
+
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.1'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+bootRepackage {
+    mainClass = 'com.zb.project.WebTransApplication'
+}
